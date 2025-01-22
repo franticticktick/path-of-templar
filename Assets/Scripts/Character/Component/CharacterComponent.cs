@@ -12,15 +12,6 @@ public abstract class CharacterComponent<T> : MonoBehaviour, ICharacterComponent
     private Transform[] bodyElements;
 
     [SerializeField]
-    private AudioClip damageAudioClip;
-
-    [SerializeField]
-    private AudioClip snowFootStepAudioClip;
-
-    [SerializeField]
-    private AudioClip roadFootStepAudioClip;
-
-    [SerializeField]
     private List<NamedAudioClip> nameAudioClips;
 
     protected AudioSource audioSource;
@@ -38,6 +29,9 @@ public abstract class CharacterComponent<T> : MonoBehaviour, ICharacterComponent
     protected CharacterAnimator characterAnimator;
 
     protected CapsuleCollider capsuleCollider;
+
+    [SerializeField]
+    private string GROUND_NAME = "Ground";
 
     void Start()
     {
@@ -80,20 +74,30 @@ public abstract class CharacterComponent<T> : MonoBehaviour, ICharacterComponent
                 Terrain terrain = hit.transform.GetComponent<Terrain>();
                 var layerName = TerrainChecker.GetLayerName(transform.position, terrain);
 
-                if(nameAudioClips != null)
+                if (nameAudioClips != null)
                 {
-                    var nameAudioClip = nameAudioClips.Find(clip => clip.name == layerName);
-                    var footStepAudioClip = nameAudioClip.RandomAudioClip();
-
-                    PlayAudioClip(footStepAudioClip, nameAudioClip.volume);
+                    FindAndPlayAudioClip(layerName);
                 }
+            }
+
+            if (hit.transform.GetComponent<MeshCollider>() != null)
+            {
+                FindAndPlayAudioClip(GROUND_NAME);
             }
         }
     }
 
+    private void FindAndPlayAudioClip(string tag)
+    {
+        var nameAudioClip = nameAudioClips.Find(clip => clip.name == tag);
+        var footStepAudioClip = nameAudioClip.RandomAudioClip();
+
+        PlayAudioClip(footStepAudioClip, nameAudioClip.volume);
+    }
+
     private void PlayAudioClip(AudioClip audioClip, float volume)
     {
-        if(audioClip != null)
+        if (audioClip != null)
         {
             audioSource.volume = volume;
             audioSource.clip = audioClip;

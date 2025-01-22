@@ -15,4 +15,9 @@ public class CurrentDialogVariantWindow : MonoBehaviour
     {
         text.text = textValue;
     }
+
+    public void Clear()
+    {
+        text.text = "";
+    }
 }
