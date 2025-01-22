@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SlotItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class SlotItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public Image itemImage;
 
@@ -92,7 +92,6 @@ public class SlotItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
     private void AddImage(string sprite)
     {
         var itemImage = gameObject.AddComponent<Image>();
-
         itemImage.sprite = Resources.Load<Sprite>(sprite);
         itemImage.transform.localScale = Vector3.one;
 
@@ -170,5 +169,15 @@ public class SlotItem : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDrag
                 itemsCount.text = count.ToString();
             }
         }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        throw new NotImplementedException();
     }
 }

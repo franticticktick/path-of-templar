@@ -39,6 +39,8 @@ public class UserCamera : MonoBehaviour
     [SerializeField]
     private HeroComponent defaultHero;
 
+    private bool cameraButtonPressed = false;
+
     void Start()
     {
 
@@ -64,7 +66,14 @@ public class UserCamera : MonoBehaviour
     //Only Move camera after everything else has been updated
     void LateUpdate()
     {
-
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            cameraButtonPressed = true;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            cameraButtonPressed = false;
+        }
         // Don't do anything if target is not defined 
         if (!target)
             return;
@@ -72,7 +81,7 @@ public class UserCamera : MonoBehaviour
         // If either mouse buttons are down, let the mouse govern camera position 
         if (GUIUtility.hotControl == 0)
         {
-            if (Input.GetMouseButton(2))
+            if (Input.GetMouseButton(2) || cameraButtonPressed)
             {
                 xDeg += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
                 yDeg -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
