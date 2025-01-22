@@ -14,4 +14,9 @@ public abstract class Armor: Item
     {
         get { return resistance; }
     }
+
+    public override string PrepareDescription()
+    {
+        throw new System.NotImplementedException();
+    }
 }
