@@ -5,6 +5,7 @@ public class Answer: ScriptableObject
 {
     [SerializeField]
     private string text;
+
     [SerializeField]
     private int id;
 
