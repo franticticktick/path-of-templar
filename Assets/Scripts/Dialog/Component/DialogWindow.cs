@@ -7,7 +7,7 @@ public class DialogWindow : MonoBehaviour
     private CurrentDialogVariantWindow variantWindow;
 
     [Inject]
-    private MiniMapWindow miniMapWindow;
+    private readonly MiniMapWindow miniMapWindow;
 
     void Start()
     {
@@ -31,6 +31,15 @@ public class DialogWindow : MonoBehaviour
     {
         answersWindow.ClearAnswers();
         SetDialog(dialog);
+    }
+
+    public void OnEndDialog(bool dialogEnded)
+    {
+        if (dialogEnded)
+        {
+            answersWindow.ClearAnswers();
+            variantWindow.Clear();
+        }
     }
 
     public void EnableWithDialog(Dialog dialog)
