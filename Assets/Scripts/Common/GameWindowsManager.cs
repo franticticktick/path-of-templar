@@ -11,7 +11,7 @@ public class GameWindowsManager : MonoBehaviour
 
     public void DisableItemPanel()
     {
-        itemPanel.MakeInvisible();
+        itemPanel.Disable();
     }
 
     public void DisableHeroCharacteristicsWindow()
