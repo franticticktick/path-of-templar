@@ -11,7 +11,8 @@ public class HeroSwitcher : MonoBehaviour
     [SerializeField]
     private HeroComponent defaultHero;
 
-    private Vector3 currentPosition;
+    [SerializeField]
+    private HeroComponent activeHero;
 
     public void OnArmorWorn(Armor armor)
     {
@@ -19,15 +20,15 @@ public class HeroSwitcher : MonoBehaviour
         {
             case GrizaKorvoArmor:
                 brunaAglo.Disable();
+                grizaKorvo.Enable(activeHero.transform.position);
                 defaultHero.Disable();
-                currentPosition = defaultHero.transform.position;
-                grizaKorvo.Enable(currentPosition);
+                activeHero = grizaKorvo;
                 break;
             case BrunaAgloArmor:
                 grizaKorvo.Disable();
                 defaultHero.Disable();
-                currentPosition = defaultHero.transform.position;
-                brunaAglo.Enable(currentPosition);
+                brunaAglo.Enable(activeHero.transform.position);
+                activeHero = brunaAglo;
                 break;
         }
     }
@@ -36,6 +37,7 @@ public class HeroSwitcher : MonoBehaviour
     {
         grizaKorvo.Disable();
         brunaAglo.Disable();
-        defaultHero.Enable(currentPosition);
+        defaultHero.Enable(activeHero.transform.position);
+        activeHero = defaultHero;
     }
 }

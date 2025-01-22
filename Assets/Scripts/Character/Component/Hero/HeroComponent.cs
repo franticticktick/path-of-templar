@@ -197,8 +197,8 @@ public class HeroComponent : CharacterComponent<Hero>
 
     public void Enable(Vector3 position)
     {
-        gameObject.SetActive(true);
         transform.position = position;
+        gameObject.SetActive(true);
     }
 
     public void Disable()

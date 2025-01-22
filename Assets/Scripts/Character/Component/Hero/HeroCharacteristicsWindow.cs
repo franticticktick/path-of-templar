@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HeroCharacteristicsWindow : MonoBehaviour
+public class HeroCharacteristicsWindow : IWithVisibility
 {
     [SerializeField]
     private Hero hero;
@@ -25,26 +25,9 @@ public class HeroCharacteristicsWindow : MonoBehaviour
         intelligenceField.text = hero.Intelligence.ToString();
     }
 
-    public void Enable()
+    public override void Enable()
     {
+        base.Enable();
         HeroCharacteristicsWindowOpen.Invoke();
-        gameObject.SetActive(true);
-    }
-
-    public void Disable()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void ToggleEnable()
-    {
-        if(gameObject.activeSelf == true)
-        {
-            Disable();
-        }
-        else
-        {
-            Enable();
-        }
     }
 }

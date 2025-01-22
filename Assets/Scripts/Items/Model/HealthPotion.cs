@@ -6,7 +6,7 @@ public class HealthPotion : Item
 {
     [SerializeField]
     private float value;
-    
+
     public HealthPotion(float value)
     {
         this.value = value;
@@ -15,6 +15,16 @@ public class HealthPotion : Item
     public float Value
     {
         get { return value; }
+    }
+
+    public override string PrepareDescription()
+    {
+        description.Append("Целебное зелье \n");
+        description.Append("Значение: ");
+        description.Append(value.ToString());
+        description.Append("единиц здоровья");
+
+        return description.ToString();
     }
 
     public override void Use(Hero hero)
