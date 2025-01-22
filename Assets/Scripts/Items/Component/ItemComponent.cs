@@ -18,7 +18,6 @@ public class ItemComponent : MonoBehaviour, ISelectable
     [SerializeField]
     private bool single = true;
 
-    public 
     void OnMouseOver()
     {
         UnityEngine.Cursor.SetCursor(takeCursorTexture, Vector3.zero, CursorMode.Auto);
@@ -61,4 +60,5 @@ public class ItemComponent : MonoBehaviour, ISelectable
     public Type InventoryItemType() => inventoryItem.GetType();
 
     public bool IsSingle() => single;
+
 }

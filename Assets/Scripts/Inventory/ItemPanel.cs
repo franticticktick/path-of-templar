@@ -2,11 +2,13 @@ using UnityEngine.Events;
 
 public class ItemPanel : IWithVisibility
 {
+
     public UnityEvent ItemPanelOpen;
 
-    protected override void MakeVisible()
+    public override void Enable()
     {
-        base.MakeVisible();
+        base.Enable();
         ItemPanelOpen?.Invoke();
     }
+
 }

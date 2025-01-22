@@ -3,9 +3,11 @@ using UnityEngine;
 public class IWithVisibility : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
+    private AudioSource audioSource;
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
@@ -21,40 +23,28 @@ public class IWithVisibility : MonoBehaviour
         canvasGroup.alpha = 1;
     }
 
-
     public void ToggleEnable()
     {
-        if(gameObject.activeSelf)
+        if (gameObject.activeSelf)
         {
-            gameObject.SetActive(false);
+            Disable();
         }
         else
         {
-            gameObject.SetActive(true);
+            Enable();
         }
     }
 
-    public void ToggleVisibility()
+    public virtual void Enable()
     {
-        if (IsVisible())
-        {
-            MakeInvisible();
-        }
-        else
-        {
-            MakeVisible();
-        }
+        gameObject.SetActive(true);
+        audioSource?.Play();
     }
 
-    protected virtual void MakeVisible()
+    public virtual void Disable()
     {
-        canvasGroup.alpha = 1;
+        audioSource?.Play();
+        gameObject.SetActive(false);
     }
 
-    public void MakeInvisible()
-    {
-        canvasGroup.alpha = 0;
-    }
-
-    private bool IsVisible() => canvasGroup.alpha != 0;
 }
